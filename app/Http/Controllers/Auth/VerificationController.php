@@ -30,17 +30,11 @@ class VerificationController extends Controller
                 "errors" => [
                     "message" => "Invalid verification link or signature"
                 ]
-                ], 422);
+            ], 422);
         }
 
         // Check if the user has already verified account
-        if ($user->hasVerifiedEmail()) {
-            return response()->json([
-                "errors" => [
-                    "message" => "Email address already verifeid"
-                ]
-                ], 422);
-        }
+        $this->isUserAlreadyVerified($user);
 
         $user->markEmailAsVerified();
         event(new Verified($user));
@@ -50,4 +44,36 @@ class VerificationController extends Controller
         ], 200);
     }
 
+    public function resend(Request $request)
+    {
+        $this->validate($request, [ 'email' => ['email', 'required']]);
+
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return response()->json([
+                "errors" => [
+                    "email" => "No user could be found with this email address"
+                ]
+            ]);
+        }
+
+        // Check if the user has already verified account
+        $this->isUserAlreadyVerified($user);
+
+        $user->sendEmailVerificationNotification();
+
+        return response()->json(["status" => 'Verification link has been resent']);
+
+    }
+
+    public function isUserAlreadyVerified($user)
+    {
+        if ($user->hasVerifiedEmail()) {
+            return response()->json([
+                "errors" => [
+                    "message" => "Email address already verifeid"
+                ]
+            ], 422);
+        }
+    }
 }

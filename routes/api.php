@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Public routes
+Route::get('me', 'User\MeController@getMe');
 
 // Guest routes
 Route::group(['middleware' => ['guest:api']], function () {

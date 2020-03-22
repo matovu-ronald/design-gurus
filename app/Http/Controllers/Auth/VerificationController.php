@@ -18,7 +18,6 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
@@ -49,6 +48,7 @@ class VerificationController extends Controller
         $this->validate($request, [ 'email' => ['email', 'required']]);
 
         $user = User::where('email', $request->email)->first();
+
         if (!$user) {
             return response()->json([
                 "errors" => [

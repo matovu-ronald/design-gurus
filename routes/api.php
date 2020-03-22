@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 // Guest routes
 Route::group(['middleware' => ['guest:api']], function () {
     Route::post('register', 'Auth\RegisterController@register');
-    Route::post('verification/verify', 'Auth\VerificationController@verify');
+    Route::post('verification/verify/{user}', 'Auth\VerificationController@verify')->name('verification.verify');
     Route::post('verification/resend', 'Auth\VerificationController@resend');
 });
 

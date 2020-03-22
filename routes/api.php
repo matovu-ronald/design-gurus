@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return response()->json(["message" => "Test passed"], 200);
+// Public routes
+
+// Guest routes
+Route::group(['middleware' => ['guest:api']], function () {
+    Route::post('register', 'Auth\RegisterController@register');
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Authenticated routes
+Route::group(['middleware' => ['auth:api']], function () {
 });

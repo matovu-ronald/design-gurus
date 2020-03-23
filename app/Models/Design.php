@@ -18,4 +18,8 @@ class Design extends Model
         'disk'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

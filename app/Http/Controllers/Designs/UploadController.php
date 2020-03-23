@@ -9,5 +9,8 @@ class UploadController extends Controller
 {
     public function upload(Request $request)
     {
+        $this->validate($request, [
+            'image' => ['required', 'mime:jpeg,gif,bmp,png,jpg', 'max:2048']
+        ]);
     }
 }

@@ -29,6 +29,6 @@ class DesignController extends Controller
             'is_live' => !$design->upload_successful ? false : $request->is_live
         ]);
 
-        return response()->json($design, 200);
+        return new DesignResource($design);
     }
 }

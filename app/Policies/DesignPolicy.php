@@ -65,7 +65,7 @@ class DesignPolicy
      */
     public function delete(User $user, Design $design)
     {
-        //
+        return $user->id === $design->user_id;
     }
 
     /**

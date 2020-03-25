@@ -13,3 +13,4 @@ yarn-error.log
 /storage/uploads/original/*
 /storage/uploads/thumbnail/*
 /storage/uploads/large/*
+.DS_Store

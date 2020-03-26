@@ -68,6 +68,14 @@ class Handler extends ExceptionHandler
             ], 404);
         }
 
+        if ($exception instanceof ModelNotDefinedException && $request->expectsJson()) {
+            return response()->json([
+                "errors" => [
+                    "message" => "No model defined"
+                ]
+            ], 404);
+        }
+
         return parent::render($request, $exception);
     }
 }

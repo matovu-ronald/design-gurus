@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 // Public routes
 Route::get('me', 'User\MeController@getMe');
 
+// Design Routes
+Route::get('designs', 'Designs\DesignController@index');
+
+// Users Routes
+Route::get('users', 'User\UserController@index');
+
 // Guest routes
 Route::group(['middleware' => ['guest:api']], function () {
     Route::post('register', 'Auth\RegisterController@register');
@@ -29,6 +35,7 @@ Route::group(['middleware' => ['guest:api']], function () {
 
 // Authenticated routes
 Route::group(['middleware' => ['auth:api']], function () {
+    // User settings
     Route::post('logout', 'Auth\LoginController@logout');
     Route::put('settings/profile', 'User\SettingsController@updateProfile');
     Route::put('settings/password', 'User\SettingsController@updatePassword');

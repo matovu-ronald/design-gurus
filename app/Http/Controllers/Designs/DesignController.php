@@ -26,6 +26,12 @@ class DesignController extends Controller
         return DesignResource::collection($designs);
     }
 
+    public function findDesign($id)
+    {
+        $design = $this->designs->find($id);
+        return new DesignResource($design);
+    }
+
     public function update(Request $request, $id)
     {
         $design = Design::findOrFail($id);
@@ -39,14 +45,14 @@ class DesignController extends Controller
             'tags' => ['required']
         ]);
 
-        $design->update([
+        $this->designs->update([
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'description' => $request->description,
             'is_live' => !$design->upload_successful ? false : $request->is_live
         ]);
 
-        $design->retag($request->tags);
+        $this->designs->applyTags($id, $request->tags);
 
         return new DesignResource($design);
     }

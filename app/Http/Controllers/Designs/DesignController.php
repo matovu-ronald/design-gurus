@@ -3,15 +3,29 @@
 namespace App\Http\Controllers\Designs;
 
 use App\Models\Design;
+use App\Jobs\DeleteImage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\DesignResource;
-use App\Jobs\DeleteImage;
 use Illuminate\Support\Facades\Storage;
+use App\Repositories\Contracts\DesignInterface;
 
 class DesignController extends Controller
 {
+    protected $designs;
+
+    public function __construct(DesignInterface $designs)
+    {
+        $this->designs = $designs;
+    }
+
+    public function index ()
+    {
+        $designs = $this->designs->all();
+        return DesignResource::collection($designs);
+    }
+
     public function update(Request $request, $id)
     {
         $design = Design::findOrFail($id);

@@ -10,6 +10,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\DesignResource;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\Contracts\DesignInterface;
+use App\Repositories\Eloquent\Criteria\ForUser;
+use App\Repositories\Eloquent\Criteria\IsLive;
+use App\Repositories\Eloquent\Criteria\LatestFirst;
 
 class DesignController extends Controller
 {
@@ -22,7 +25,11 @@ class DesignController extends Controller
 
     public function index ()
     {
-        $designs = $this->designs->all();
+        $designs = $this->designs->withCriteria([
+            new LatestFirst,
+            new IsLive,
+            new ForUser(2)
+        ])->all();
         return DesignResource::collection($designs);
     }
 

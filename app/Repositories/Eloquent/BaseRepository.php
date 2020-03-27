@@ -4,8 +4,10 @@ namespace App\Repositories\Eloquent;
 
 use App\Exceptions\ModelNotDefinedException;
 use App\Repositories\Contracts\BaseInterface;
+use App\Repositories\Criteria\CriteriaInterface;
+use Illuminate\Support\Arr;
 
-abstract class BaseRepository implements BaseInterface
+abstract class BaseRepository implements BaseInterface, CriteriaInterface
 {
     protected $model;
 

@@ -16,7 +16,7 @@ abstract class BaseRepository implements BaseInterface
 
     public function all()
     {
-        return $this->model->all();
+        return $this->model->get();
     }
 
     public function find($id)
@@ -51,6 +51,9 @@ abstract class BaseRepository implements BaseInterface
         return $record;
     }
 
+    /**
+     * Delete resource
+     */
     public function delete($id)
     {
         $record = $this->find($id);

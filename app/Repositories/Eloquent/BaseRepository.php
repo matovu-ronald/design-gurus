@@ -57,6 +57,20 @@ abstract class BaseRepository implements BaseInterface
         return $record->delete();
     }
 
+    public function withCriteria(...$criteria)
+    {
+        $criteria = Arr::flatten($criteria);
+
+        foreach ($criteria as $criterion){
+            $this->model = $criterion->apply($this->model);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the sub model that access the BaseRepository
+     */
     protected function getModelClass()
     {
         if (!method_exists($this, 'model')) {

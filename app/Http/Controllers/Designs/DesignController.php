@@ -45,7 +45,7 @@ class DesignController extends Controller
             'tags' => ['required']
         ]);
 
-        $this->designs->update([
+        $design = $this->designs->update($id, [
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'description' => $request->description,
@@ -70,7 +70,7 @@ class DesignController extends Controller
                 Storage::disk($design->disk)->delete("uploads/designs/{$size}/". $design->image);
             }
         }
-        $design->delete();
+        $this->designs->delete();
 
         return response()->json(['message' => 'Record deleted successfully'], 200);
     }

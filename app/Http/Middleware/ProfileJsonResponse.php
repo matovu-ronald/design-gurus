@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Arr;
 use Illuminate\Http\JsonResponse;
 
 class ProfileJsonResponse
@@ -25,9 +26,9 @@ class ProfileJsonResponse
 
         // Profile the Json response
         if ($response instanceof JsonResponse && $request->has('_debug')) {
-            $response->setData(array_merge($response->getData(true), [
-                'debugbar' => app('debugbar')->getData(true)
-            ]));
+            $response->setData(array_merge([
+                '_debugbar' => Arr::only(app('debugbar')->getData(true), ['queries'])
+            ], $response->getData(true)));
         }
 
         return $response;

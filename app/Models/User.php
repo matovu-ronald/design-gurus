@@ -4,11 +4,11 @@ namespace App\Models;
 
 use App\Notifications\ResetPassword;
 use App\Notifications\VerifyEmail;
-use Tymon\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
@@ -26,7 +26,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'username',
         'location',
         'formatted_address',
-        'available_to_hire'
+        'available_to_hire',
     ];
 
     protected $spatialFields = [
@@ -55,6 +55,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         $this->notify(new VerifyEmail);
     }
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPassword($token));

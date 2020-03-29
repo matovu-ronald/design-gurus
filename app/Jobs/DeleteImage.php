@@ -2,13 +2,12 @@
 
 namespace App\Jobs;
 
-use App\Models\Design;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 
 class DeleteImage implements ShouldQueue
 {
@@ -36,12 +35,11 @@ class DeleteImage implements ShouldQueue
     public function handle()
     {
         // Delete the files associated with the record.
-        foreach(['thumbnail', 'large', 'original'] as $size) {
+        foreach (['thumbnail', 'large', 'original'] as $size) {
             // Check if the file exists on the disk
-            if (Storage::disk($this->disk)->exists("uploads/designs/{$size}/". $this->image)) {
-                Storage::disk($this->disk)->delete("uploads/designs/{$size}/". $this->image);
+            if (Storage::disk($this->disk)->exists("uploads/designs/{$size}/".$this->image)) {
+                Storage::disk($this->disk)->delete("uploads/designs/{$size}/".$this->image);
             }
         }
-
     }
 }

@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\DesignInterface;
+use App\Repositories\Contracts\UserInterface;
+use App\Repositories\Eloquent\DesignRepository;
+use App\Repositories\Eloquent\UserRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Contracts\{
     CommentInterface,

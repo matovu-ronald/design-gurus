@@ -50,15 +50,17 @@ abstract class BaseRepository implements BaseInterface, CriteriaInterface
     {
         $record = $this->find($id);
         $record->update($data);
+
         return $record;
     }
 
     /**
-     * Delete resource
+     * Delete resource.
      */
     public function delete($id)
     {
         $record = $this->find($id);
+
         return $record->delete();
     }
 
@@ -66,7 +68,7 @@ abstract class BaseRepository implements BaseInterface, CriteriaInterface
     {
         $criteria = Arr::flatten($criteria);
 
-        foreach ($criteria as $criterion){
+        foreach ($criteria as $criterion) {
             $this->model = $criterion->apply($this->model);
         }
 
@@ -74,11 +76,11 @@ abstract class BaseRepository implements BaseInterface, CriteriaInterface
     }
 
     /**
-     * Get the sub model that access the BaseRepository
+     * Get the sub model that access the BaseRepository.
      */
     protected function getModelClass()
     {
-        if (!method_exists($this, 'model')) {
+        if (! method_exists($this, 'model')) {
             throw new ModelNotDefinedException();
         }
 

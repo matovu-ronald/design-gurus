@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Arr;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Arr;
 
 class ProfileJsonResponse
 {
@@ -20,14 +20,14 @@ class ProfileJsonResponse
         $response = $next($request);
 
         // Check if debugbar is enabled
-        if(!app()->bound('debugbar') || !app('debugbar')->isEnabled()) {
+        if (! app()->bound('debugbar') || ! app('debugbar')->isEnabled()) {
             return $response;
         }
 
         // Profile the Json response
         if ($response instanceof JsonResponse && $request->has('_debug')) {
             $response->setData(array_merge([
-                '_debugbar' => Arr::only(app('debugbar')->getData(true), ['queries'])
+                '_debugbar' => Arr::only(app('debugbar')->getData(true), ['queries']),
             ], $response->getData(true)));
         }
 

@@ -19,8 +19,9 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->users->withCriteria([
-            new EagerLoad(['designs'])
+            new EagerLoad(['designs']),
         ])->all();
+
         return UserResource::collection($users);
     }
 }

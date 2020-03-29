@@ -2,8 +2,8 @@
 
 namespace App\Rules;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
 class CheckSamePassword implements Rule
 {
@@ -26,7 +26,7 @@ class CheckSamePassword implements Rule
      */
     public function passes($attribute, $value)
     {
-        return !Hash::check($value, auth()->user()->password);
+        return ! Hash::check($value, auth()->user()->password);
     }
 
     /**

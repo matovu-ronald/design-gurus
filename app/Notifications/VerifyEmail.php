@@ -4,15 +4,12 @@ namespace App\Notifications;
 
 use Carbon\Carbon;
 use Illuminate\Auth\Notifications\VerifyEmail as Notification;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\URL;
 
 class VerifyEmail extends Notification
 {
-   protected function verificationUrl($notifiable)
-   {
+    protected function verificationUrl($notifiable)
+    {
         $appUrl = config('app.client_url', config('app.url'));
 
         $url = URL::temporarySignedRoute(
@@ -22,7 +19,5 @@ class VerifyEmail extends Notification
         );
 
         return str_replace(url('/api'), $appUrl, $url);
-
-
-   }
+    }
 }

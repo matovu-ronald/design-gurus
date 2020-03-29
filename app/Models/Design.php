@@ -19,7 +19,7 @@ class Design extends Model
         'close_to_comment',
         'is_live',
         'upload_successful',
-        'disk'
+        'disk',
     ];
 
     public function user()
@@ -38,13 +38,13 @@ class Design extends Model
         return [
             'thumbnail' => $this->getImagePath('thumbnail'),
             'original' => $this->getImagePath('original'),
-            'large' => $this->getImagePath('large')
+            'large' => $this->getImagePath('large'),
         ];
     }
 
     protected function getImagePath($size)
     {
         return Storage::disk($this->disk)
-            ->url("uploads/designs/{$size}/". $this->image);
+            ->url("uploads/designs/{$size}/".$this->image);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class DesignResource extends JsonResource
@@ -25,16 +24,16 @@ class DesignResource extends JsonResource
             'description' => $this->description,
             'tags_list' => [
                 'tags' => $this->tagArray,
-                'normalized' => $this->tagArrayNormalized
+                'normalized' => $this->tagArrayNormalized,
             ],
             'created_at_dates' => [
                 'created_at_human' => $this->created_at->diffForHumans(),
-                'created_at' => $this->created_at
+                'created_at' => $this->created_at,
             ],
             'updated_at_dates' => [
                 'updated_at_human' => $this->updated_at->diffForHumans(),
-                'updated_at' => $this->updated_at
-            ]
+                'updated_at' => $this->updated_at,
+            ],
 
         ];
     }

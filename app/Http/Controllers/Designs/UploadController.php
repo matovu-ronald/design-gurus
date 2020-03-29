@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Designs;
 
+use App\Http\Controllers\Controller;
 use App\Jobs\UploadImage;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class UploadController extends Controller
 {
     public function upload(Request $request)
     {
         $this->validate($request, [
-            'image' => ['required', 'mimes:jpeg,gif,bmp,png,jpg', 'max:2048']
+            'image' => ['required', 'mimes:jpeg,gif,bmp,png,jpg', 'max:2048'],
         ]);
 
         // Get the image
@@ -20,7 +20,7 @@ class UploadController extends Controller
 
         // Get the original file name and replace spaces with underscore
         // Business Cards.png = timestamp()_business_card.png
-        $filename = time() . "_" . preg_replace('/\s+/', '_', strtolower($image->getClientOriginalName()));
+        $filename = time().'_'.preg_replace('/\s+/', '_', strtolower($image->getClientOriginalName()));
 
         // Move the image to the temporary location (temp)
         $tmp = $image->storeAs('uploads/original', $filename, 'tmp');
@@ -28,7 +28,7 @@ class UploadController extends Controller
         // Create the database record for the design
         $design = auth()->user()->designs()->create([
             'image' => $filename,
-            'disk' => config('site.upload_disk')
+            'disk' => config('site.upload_disk'),
         ]);
 
         // Dispatch the job to handle image manipulation.

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Designs;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
 use App\Repositories\Contracts\CommentInterface;
 use App\Repositories\Contracts\DesignInterface;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
@@ -22,12 +22,12 @@ class CommentController extends Controller
     public function store(Request $request, $designId)
     {
         $this->validate($request, [
-            'body' => ['required']
+            'body' => ['required'],
         ]);
 
         $comment = $this->designs->addComment($designId, [
             'body' => $request->body,
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
         ]);
 
         return new CommentResource($comment);
@@ -40,11 +40,11 @@ class CommentController extends Controller
         $this->authorize('update', $comment);
 
         $this->validate($request, [
-            'body' => ['required']
+            'body' => ['required'],
         ]);
 
         $comment = $this->comments->update($id, [
-            'body' => $request->body
+            'body' => $request->body,
         ]);
 
         return new CommentResource($comment);

@@ -9,11 +9,11 @@ class Team extends Model
     protected $fillable = [
         'name',
         'owner_id',
-        'slug'
+        'slug',
     ];
 
     /**
-     * Get the owner of the team
+     * Get the owner of the team.
      */
     public function owner()
     {
@@ -21,7 +21,7 @@ class Team extends Model
     }
 
     /**
-     * Get the members that belong to a particular team
+     * Get the members that belong to a particular team.
      */
     public function members()
     {
@@ -30,7 +30,7 @@ class Team extends Model
     }
 
     /**
-     * Get the designs for the team
+     * Get the designs for the team.
      */
     public function designs()
     {

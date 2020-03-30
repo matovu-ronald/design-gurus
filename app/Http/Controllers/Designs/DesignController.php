@@ -81,7 +81,7 @@ class DesignController extends Controller
                 Storage::disk($design->disk)->delete("uploads/designs/{$size}/".$design->image);
             }
         }
-        $this->designs->delete();
+        $this->designs->delete($design->id);
 
         return response()->json(['message' => 'Record deleted successfully'], 200);
     }

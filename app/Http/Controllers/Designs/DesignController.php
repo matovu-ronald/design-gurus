@@ -30,7 +30,7 @@ class DesignController extends Controller
             new LatestFirst,
             new IsLive,
             new ForUser(2),
-            new EagerLoad(['user', 'comments', 'tags'])
+            new EagerLoad(['user', 'comments', 'tags']),
         ])->all();
 
         return DesignResource::collection($designs);

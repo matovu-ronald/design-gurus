@@ -81,13 +81,48 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         return [];
     }
 
+    /**
+     * Get the designs of the user
+     */
     public function designs()
     {
         return $this->hasMany(Design::class);
     }
 
+    /**
+     * Get the comments made by the user.
+     */
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Teams the user belongs to
+     */
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class)
+            ->withTimestamps();
+    }
+
+    /**
+     * Get the teams owned by the user
+     */
+    public function ownedTeams()
+    {
+        return $this->teams()
+            ->where('owner_id', $this->id);
+    }
+
+    /**
+     * Check if user is the owner of the team
+     */
+    public function isOwnerOfTeam($team)
+    {
+        return (bool)$this->teams()
+            ->where('id', $team->id)
+            ->where('owner_id', $this->id)
+            ->count();
     }
 }

@@ -6,6 +6,13 @@ use App\Models\Like;
 
 trait Likeable
 {
+    public static function bootLikeable()
+    {
+        static::deleting(function($model) {
+            $model->removeLikes();
+        });
+    }
+
     public function likes()
     {
         return $this->morphMany(Like::class, 'likeable');
@@ -55,4 +62,10 @@ trait Likeable
             ->count();
     }
 
+    public function removeLikes()
+    {
+        if ($this->likes()->count()) {
+            $this->likes()->delete();
+        }
+    }
 }

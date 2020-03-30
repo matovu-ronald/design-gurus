@@ -7,6 +7,7 @@ use App\Http\Resources\DesignResource;
 use App\Jobs\DeleteImage;
 use App\Models\Design;
 use App\Repositories\Contracts\DesignInterface;
+use App\Repositories\Eloquent\Criteria\EagerLoad;
 use App\Repositories\Eloquent\Criteria\ForUser;
 use App\Repositories\Eloquent\Criteria\IsLive;
 use App\Repositories\Eloquent\Criteria\LatestFirst;
@@ -29,6 +30,7 @@ class DesignController extends Controller
             new LatestFirst,
             new IsLive,
             new ForUser(2),
+            new EagerLoad(['user', 'comments', 'tags'])
         ])->all();
 
         return DesignResource::collection($designs);

@@ -8,7 +8,7 @@ trait Likeable
 {
     public static function bootLikeable()
     {
-        static::deleting(function($model) {
+        static::deleting(function ($model) {
             $model->removeLikes();
         });
     }
@@ -19,11 +19,11 @@ trait Likeable
     }
 
     /**
-     * Like model
+     * Like model.
      */
     public function like()
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return;
         }
 
@@ -37,16 +37,16 @@ trait Likeable
     }
 
     /**
-     * Unlike model
+     * Unlike model.
      */
     public function unlike()
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return;
         }
 
         // Check if the current user had already liked the model
-        if (!$this->isLikedByUser(auth()->id())) {
+        if (! $this->isLikedByUser(auth()->id())) {
             return;
         }
 
@@ -57,7 +57,7 @@ trait Likeable
 
     public function isLikedByUser($userId)
     {
-        return (bool)$this->likes()
+        return (bool) $this->likes()
             ->where('user_id', $userId)
             ->count();
     }

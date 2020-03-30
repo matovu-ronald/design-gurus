@@ -82,7 +82,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     }
 
     /**
-     * Get the designs of the user
+     * Get the designs of the user.
      */
     public function designs()
     {
@@ -98,7 +98,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     }
 
     /**
-     * Teams the user belongs to
+     * Teams the user belongs to.
      */
     public function teams()
     {
@@ -107,7 +107,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     }
 
     /**
-     * Get the teams owned by the user
+     * Get the teams owned by the user.
      */
     public function ownedTeams()
     {
@@ -116,11 +116,11 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     }
 
     /**
-     * Check if user is the owner of the team
+     * Check if user is the owner of the team.
      */
     public function isOwnerOfTeam($team)
     {
-        return (bool)$this->teams()
+        return (bool) $this->teams()
             ->where('id', $team->id)
             ->where('owner_id', $this->id)
             ->count();

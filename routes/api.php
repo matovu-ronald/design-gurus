@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 /**
- * Public routes
- *
+ * Public routes.
  */
 // Me
 Route::get('me', 'User\MeController@getMe');
@@ -31,8 +30,7 @@ Route::get('users', 'User\UserController@index');
 Route::get('teams/slug/{slug}', 'Teams\TeamController@findBySlug');
 
 /**
- * Guest routes
- *
+ * Guest routes.
  */
 Route::group(['middleware' => ['guest:api']], function () {
     Route::post('register', 'Auth\RegisterController@register');
@@ -44,8 +42,7 @@ Route::group(['middleware' => ['guest:api']], function () {
 });
 
 /**
- * Authenticated routes
- *
+ * Authenticated routes.
  */
 Route::group(['middleware' => ['auth:api']], function () {
     // User settings

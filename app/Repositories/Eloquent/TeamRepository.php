@@ -4,7 +4,6 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Team;
 use App\Repositories\Contracts\TeamInterface;
-use App\Repositories\Eloquent\BaseRepository;
 
 class TeamRepository extends BaseRepository implements TeamInterface
 {
@@ -13,11 +12,10 @@ class TeamRepository extends BaseRepository implements TeamInterface
      */
     public function fetchUserTeams()
     {
-
     }
 
     /**
-     * Get model for the repository
+     * Get model for the repository.
      */
     public function model()
     {

@@ -14,3 +14,6 @@ yarn-error.log
 /storage/uploads/thumbnail/*
 /storage/uploads/large/*
 .DS_Store
+*.xml
+*.iml
+/.idea/*

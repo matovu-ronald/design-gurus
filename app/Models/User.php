@@ -120,8 +120,8 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      */
     public function isOwnerOfTeam($team)
     {
-        return (bool) $this->teams()
-            ->where('id', $team->id)
+        return (bool)$this->teams()
+            ->where('team_id', $team->id)
             ->where('owner_id', $this->id)
             ->count();
     }

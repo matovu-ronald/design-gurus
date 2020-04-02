@@ -12,6 +12,22 @@ class Team extends Model
         'slug',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        // When team is created, add current user as a team member
+        static::created(function($team) {
+            // auth()->user()->teams()->attach($team->id);
+            $team->members()->attach(auth()->id());
+        });
+
+        static::deleting(function($team) {
+            // auth()->user()->teams->sync([]);
+            $team->members()->sync([]);
+        });
+    }
+
     /**
      * Get the owner of the team.
      */

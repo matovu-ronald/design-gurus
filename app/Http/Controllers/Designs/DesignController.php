@@ -54,9 +54,11 @@ class DesignController extends Controller
             'description' => ['required', 'min:20', 'max:200', 'string'],
             'is_live' => ['required'],
             'tags' => ['required'],
+            'team' => ['required_if:assign_to_team,true']
         ]);
 
         $design = $this->designs->update($id, [
+            'team_id' => $request->team,
             'title' => $request->title,
             'slug' => Str::slug($request->title),
             'description' => $request->description,

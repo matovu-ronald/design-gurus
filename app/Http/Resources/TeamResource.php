@@ -2,8 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\UserResource;
-use App\Http\Resources\DesignResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TeamResource extends JsonResource

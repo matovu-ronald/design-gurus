@@ -17,12 +17,12 @@ class Team extends Model
         parent::boot();
 
         // When team is created, add current user as a team member
-        static::created(function($team) {
+        static::created(function ($team) {
             // auth()->user()->teams()->attach($team->id);
             $team->members()->attach(auth()->id());
         });
 
-        static::deleting(function($team) {
+        static::deleting(function ($team) {
             // auth()->user()->teams->sync([]);
             $team->members()->sync([]);
         });

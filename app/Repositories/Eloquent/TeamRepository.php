@@ -13,7 +13,7 @@ class TeamRepository extends BaseRepository implements TeamInterface
      */
     public function fetchUserTeams()
     {
-
+        return auth()->user()->teams;
     }
 
     /**

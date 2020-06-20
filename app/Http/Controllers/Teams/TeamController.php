@@ -35,7 +35,8 @@ class TeamController extends Controller
      */
     public function fetchUserTeams()
     {
-
+        $teams = $this->teams->fetchUserTeams();
+        return TeamResource::collection($teams);
     }
 
     /**

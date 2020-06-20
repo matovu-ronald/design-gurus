@@ -54,7 +54,7 @@ class DesignController extends Controller
             'description' => ['required', 'min:20', 'max:200', 'string'],
             'is_live' => ['required'],
             'tags' => ['required'],
-            'team' => ['required_if:assign_to_team,true']
+            'team' => ['required_if:assign_to_team,true'],
         ]);
 
         $design = $this->designs->update($id, [
